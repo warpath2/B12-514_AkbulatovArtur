@@ -13,10 +13,10 @@ def adaptive_filter(
     M, N = Vs.shape
     M2, K = Vj.shape
     K2 = len(diag_A)
-    
+
     if M != M2 or K != K2:
         raise ShapeMismatchError
-    
+
     I = np.eye(M)
     A = np.diag(diag_A)
     Vj_H = Vj.conj().T
