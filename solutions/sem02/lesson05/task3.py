@@ -17,13 +17,13 @@ def adaptive_filter(
     if M != M2 or K != K2:
         raise ShapeMismatchError
 
-    I = np.eye(M)
-    A = np.diag(diag_A)
+    Imx = np.eye(M)
+    Amx = np.diag(diag_A)
     Vj_H = Vj.conj().T
-    inner = Vj_H @ Vj @ A
-    I_K = np.eye(K)
-    to_invert = I_K + inner
+    inner = Vj_H @ Vj @ Amx
+    I_Kmx = np.eye(K)
+    to_invert = I_Kmx + inner
     inverted = np.linalg.inv(to_invert)
-    R_inv = I - Vj @ inverted @ Vj_H
+    R_inv = Imx - Vj @ inverted @ Vj_H
     y = R_inv @ Vs
     return y
